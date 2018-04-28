@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="model" type="tech.takenoko.easyandroidapp.viewmodel.CommonViewModel"/>
+        <variable name="onOkClick" type="android.view.View.OnClickListener"/>
     </data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,13 +23,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/super_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:text="@{model.buttonText}"/>
+            android:text="@{model.buttonText}"
+            android:onClick="@{onOkClick}" />
     </android.support.constraint.ConstraintLayout>
 </layout>
 

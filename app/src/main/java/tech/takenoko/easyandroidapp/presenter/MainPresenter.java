@@ -1,10 +1,14 @@
 package tech.takenoko.easyandroidapp.presenter;
 
-import android.support.v7.view.menu.BaseMenuPresenter;
+import android.content.Context;
+
+import javax.inject.Inject;
 
 import lombok.Getter;
+import tech.takenoko.easyandroidapp.App;
 import tech.takenoko.easyandroidapp.model.DataRepository;
-import tech.takenoko.easyandroidapp.view.MainViewable;
+import tech.takenoko.easyandroidapp.model.localdb.BarcodeDBHelper;
+import tech.takenoko.easyandroidapp.view.io.MainViewable;
 import tech.takenoko.easyandroidapp.viewmodel.CommonViewModel;
 
 /**
@@ -14,6 +18,7 @@ public class MainPresenter extends BasePresenter {
 
     /** Activity Interface */
     private MainViewable viewable;
+    private Context context;
 
     /** Model */
     private DataRepository dataRepository;
@@ -23,8 +28,8 @@ public class MainPresenter extends BasePresenter {
 
     /**
      * Constracter
-     * @param viewable Activity Interface.
      */
+    @Inject
     public MainPresenter(MainViewable viewable) {
         this.viewable = viewable;
     }
@@ -34,5 +39,12 @@ public class MainPresenter extends BasePresenter {
      */
     public void loadView() {
         viewable.render();
+    }
+
+    /**
+     *
+     */
+    public void setupCamera() {
+        viewable.transtionExtentionCapture();
     }
 }

@@ -13,23 +13,23 @@ public class CLog {
 
     final static String LOG_FORMAT = "--- [ %-30s ]%s";
 
-    private String isCurrent() {
+    private static String isCurrent() {
         return ""; // Thread.currentThread().equals(getMainLooper().getThread());
     }
 
-    void debug(@NonNull String tag, @NonNull String msg) {
+    public static void debug(@NonNull String tag, @NonNull String msg) {
         Log.d(String.format(LOG_FORMAT, tag, isCurrent()), msg);
     }
 
-    void info(@NonNull String tag, @NonNull String msg) {
+    public static void info(@NonNull String tag, @NonNull String msg) {
         Log.i(String.format(LOG_FORMAT, tag, isCurrent()), msg);
     }
 
-    void warn(@NonNull String tag, @NonNull String msg) {
+    public static void warn(@NonNull String tag, @NonNull String msg) {
         Log.w(String.format(LOG_FORMAT, tag, isCurrent()), msg);
     }
 
-    void error(@NonNull String tag, @NonNull String msg) {
+    public static void error(@NonNull String tag, @NonNull String msg) {
         Log.e(String.format(LOG_FORMAT, tag, isCurrent()), msg);
     }
 }

@@ -6,5 +6,4 @@ package tech.takenoko.easyandroidapp.model;
 
 public class DataRepository {
 
-
 }
