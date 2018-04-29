@@ -9,20 +9,21 @@ import dagger.android.ActivityKey;
 import dagger.android.AndroidInjector;
 import dagger.multibindings.IntoMap;
 import tech.takenoko.easyandroidapp.view.MainActivity;
+import tech.takenoko.easyandroidapp.view.QRCodeReaderActivity;
 
 /**
  * Created by takenoko on 2018/04/28.
  */
 
-public interface MainModules {
+public interface QRCodeReaderModules {
 
     /**
      * Activity
      */
     @Subcomponent
-    interface RouteActivitySubcomp extends AndroidInjector<MainActivity> {
+    interface RouteActivitySubcomp extends AndroidInjector<QRCodeReaderActivity> {
         @Subcomponent.Builder
-        abstract class Builder extends AndroidInjector.Builder<MainActivity>{}
+        abstract class Builder extends AndroidInjector.Builder<QRCodeReaderActivity>{}
     }
 
     /**
@@ -30,7 +31,7 @@ public interface MainModules {
      */
     @Module(subcomponents = {RouteActivitySubcomp.class})
     abstract class RouteActivityModule {
-        @Binds @IntoMap @ActivityKey(MainActivity.class)
+        @Binds @IntoMap @ActivityKey(QRCodeReaderActivity.class)
         abstract AndroidInjector.Factory<? extends Activity> bindAndroidInjectorFactory(RouteActivitySubcomp.Builder builder);
     }
 

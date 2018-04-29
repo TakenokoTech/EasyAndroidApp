@@ -1,5 +1,8 @@
 package tech.takenoko.easyandroidapp.presenter;
 
+import javax.inject.Inject;
+
+import tech.takenoko.easyandroidapp.App;
 import tech.takenoko.easyandroidapp.view.io.MainViewable;
 import tech.takenoko.easyandroidapp.view.io.QRCodeReaderViewable;
 
@@ -14,9 +17,13 @@ public class QRCodeReaderPresenter extends BasePresenter {
 
     /**
      * Constracter
-     * @param viewable Activity Interface.
+     * @param app Application
      */
-    public QRCodeReaderPresenter(QRCodeReaderViewable viewable) {
+    @Inject QRCodeReaderPresenter(App app) {
+        super(app);
+    }
+
+    public void setViewable(QRCodeReaderViewable viewable) {
         this.viewable = viewable;
     }
 

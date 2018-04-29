@@ -1,7 +1,5 @@
 package tech.takenoko.easyandroidapp;
 
-import android.app.Application;
-
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 
@@ -13,6 +11,7 @@ import dagger.android.DaggerApplication;
 public class App extends DaggerApplication {
 
     private static App inst;
+    private AppComponent applicationComponent;
 
     @Override
     public void onCreate() {
@@ -22,7 +21,12 @@ public class App extends DaggerApplication {
 
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerAppComponent.builder().application(this).build();
+        applicationComponent = DaggerAppComponent.builder().application(this).build();
+        return applicationComponent;
+    }
+
+    public AppComponent getApplicationComponent() {
+        return applicationComponent;
     }
 
     public static App getInstance() {

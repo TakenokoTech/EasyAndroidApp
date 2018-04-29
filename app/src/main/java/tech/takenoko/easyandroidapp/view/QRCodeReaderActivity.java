@@ -13,6 +13,9 @@ import com.journeyapps.barcodescanner.CompoundBarcodeView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import tech.takenoko.easyandroidapp.R;
 import tech.takenoko.easyandroidapp.databinding.ActivityScanBinding;
 import tech.takenoko.easyandroidapp.presenter.QRCodeReaderPresenter;
@@ -27,15 +30,23 @@ public class QRCodeReaderActivity extends CaptureActivity implements QRCodeReade
 
     private final String tag = this.toString();
     private CompoundBarcodeView barcodeView;
-    private QRCodeReaderPresenter presenter = new QRCodeReaderPresenter(this);
+
+    @Inject
+    QRCodeReaderPresenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Injection
+        AndroidInjection.inject(this);
+        presenter.setViewable(this);
+
+        // databinding
         ActivityScanBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_scan);
         binding.setOnOkClick(this);
 
-        //
+        // setup camera.
         barcodeView = findViewById(R.id.barcode_view);
         barcodeView.decodeSingle(new BarcodeCallback() {
             @Override

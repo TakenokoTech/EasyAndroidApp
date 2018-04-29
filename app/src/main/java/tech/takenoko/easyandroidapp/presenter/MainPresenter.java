@@ -2,12 +2,15 @@ package tech.takenoko.easyandroidapp.presenter;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import lombok.Getter;
 import tech.takenoko.easyandroidapp.App;
-import tech.takenoko.easyandroidapp.model.DataRepository;
-import tech.takenoko.easyandroidapp.model.localdb.BarcodeDBHelper;
+import tech.takenoko.easyandroidapp.model.ormadb.LogDao;
+import tech.takenoko.easyandroidapp.model.ormadb.LogDto;
 import tech.takenoko.easyandroidapp.view.io.MainViewable;
 import tech.takenoko.easyandroidapp.viewmodel.CommonViewModel;
 
@@ -16,35 +19,50 @@ import tech.takenoko.easyandroidapp.viewmodel.CommonViewModel;
  */
 public class MainPresenter extends BasePresenter {
 
+    private final String tag = this.toString();
+
     /** Activity Interface */
     private MainViewable viewable;
-    private Context context;
-
-    /** Model */
-    private DataRepository dataRepository;
 
     /** View Model */
     @Getter private CommonViewModel commonVM = new CommonViewModel();
 
+    /** Dao */
+    @Inject LogDao logDao;
+
     /**
      * Constracter
+     * @param app Application
      */
-    @Inject
-    public MainPresenter(MainViewable viewable) {
+    @Inject MainPresenter(App app) {
+        super(app);
+    }
+
+    /**
+     * DI of Activity.
+     * @param viewable
+     */
+    public void setViewable(MainViewable viewable) {
         this.viewable = viewable;
     }
 
     /**
-     *
+     * First Rendering.
      */
     public void loadView() {
         viewable.render();
     }
 
     /**
-     *
+     * Usecase.
      */
     public void setupCamera() {
+        List<LogDto> list = new ArrayList<>();
+        LogDto log1 = new LogDto();
+        log1.setLog1("aaaaa");
+        log1.setLog2("bbbbb");
+        list.add(log1);
+        logDao.insertAll(list);
         viewable.transtionExtentionCapture();
     }
 }
