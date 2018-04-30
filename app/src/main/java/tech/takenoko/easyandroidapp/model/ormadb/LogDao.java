@@ -7,6 +7,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import tech.takenoko.easyandroidapp.model.ormadb.dto.LogDto;
+import tech.takenoko.easyandroidapp.model.ormadb.dto.LogDto_Relation;
+import tech.takenoko.easyandroidapp.model.ormadb.dto.OrmaDatabase;
+
 /**
  * Created by takenoko on 2018/04/29.
  */

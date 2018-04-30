@@ -7,7 +7,4 @@ import android.content.Context;
  */
 
 public interface MainViewable {
-
-    void render();
-    void transtionExtentionCapture();
 }

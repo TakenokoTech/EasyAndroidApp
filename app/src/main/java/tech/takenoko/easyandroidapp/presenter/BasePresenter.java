@@ -14,7 +14,7 @@ import tech.takenoko.easyandroidapp.view.io.MainViewable;
 
 abstract class BasePresenter {
 
-    private Context context;
+    protected Context context;
     private Handler uiThreadHandler;
 
     BasePresenter(App app) {

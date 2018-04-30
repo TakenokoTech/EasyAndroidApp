@@ -1,18 +1,13 @@
 package tech.takenoko.easyandroidapp.presenter;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Intent;
 
 import javax.inject.Inject;
 
 import lombok.Getter;
 import tech.takenoko.easyandroidapp.App;
-import tech.takenoko.easyandroidapp.model.api.Api;
-import tech.takenoko.easyandroidapp.model.api.io.ApiHandler;
-import tech.takenoko.easyandroidapp.model.api.model.ApiModel;
-import tech.takenoko.easyandroidapp.model.ormadb.LogDao;
-import tech.takenoko.easyandroidapp.model.ormadb.LogDto;
-import tech.takenoko.easyandroidapp.utility.CLog;
+import tech.takenoko.easyandroidapp.model.CacheRepository;
+import tech.takenoko.easyandroidapp.view.QRCodeReaderActivity;
 import tech.takenoko.easyandroidapp.view.io.MainViewable;
 import tech.takenoko.easyandroidapp.viewmodel.CommonViewModel;
 
@@ -26,14 +21,9 @@ public class MainPresenter extends BasePresenter {
     /** Activity Interface */
     private MainViewable viewable;
 
-    /** View Model */
-    @Getter private CommonViewModel commonVM = new CommonViewModel();
-
-    /** Dao */
-    @Inject LogDao logDao;
-
+    /** */
     @Inject
-    Api api;
+    CacheRepository cacheRepository;
 
     /**
      * Constracter
@@ -55,27 +45,16 @@ public class MainPresenter extends BasePresenter {
      * First Rendering.
      */
     public void loadView() {
-        viewable.render();
+
     }
 
     /**
      * Usecase.
      */
     public void setupCamera() {
-        List<LogDto> list = new ArrayList<>();
-        api.getLetest(new ApiHandler<ApiModel>() {
-            @Override public void success(ApiModel model) {
-                CLog.info(tag, "success. " + model.toString());
-            }
-            @Override public void failure() {
-                CLog.error(tag, "failed.");
-            }
-        });
-        LogDto log1 = new LogDto();
-        log1.setLog1("aaaaa");
-        log1.setLog2("bbbbb");
-        list.add(log1);
-        logDao.insertAll(list);
-//        viewable.transtionExtentionCapture();
+        cacheRepository.getLetest();
+        cacheRepository.add();
+        Intent intent = new Intent(this.context, QRCodeReaderActivity.class);
+//        context.startActivity(intent);
     }
 }

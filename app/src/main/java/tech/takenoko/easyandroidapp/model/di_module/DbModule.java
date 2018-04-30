@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import tech.takenoko.easyandroidapp.App;
-import tech.takenoko.easyandroidapp.model.ormadb.OrmaDatabase;
+import tech.takenoko.easyandroidapp.model.ormadb.dto.OrmaDatabase;
 
 /**
  * Created by takenoko on 2018/04/29.

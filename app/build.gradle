@@ -58,4 +58,6 @@ dependencies {
     // Orma
     annotationProcessor 'com.github.gfx.android.orma:orma-processor:4.2.5'
     compile 'com.github.gfx.android.orma:orma:4.2.5'
+    // EventBus
+    compile 'org.greenrobot:eventbus:3.1.1'
 }
