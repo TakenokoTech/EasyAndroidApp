@@ -1,4 +1,4 @@
-package tech.takenoko.easyandroidapp.model.api;
+package tech.takenoko.easyandroidapp.model.api.model;
 
 import java.io.Serializable;
 import java.util.Map;

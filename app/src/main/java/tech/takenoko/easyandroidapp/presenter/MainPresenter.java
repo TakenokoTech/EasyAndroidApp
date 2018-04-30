@@ -1,7 +1,5 @@
 package tech.takenoko.easyandroidapp.presenter;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,8 @@ import javax.inject.Inject;
 import lombok.Getter;
 import tech.takenoko.easyandroidapp.App;
 import tech.takenoko.easyandroidapp.model.api.Api;
-import tech.takenoko.easyandroidapp.model.api.ApiModel;
+import tech.takenoko.easyandroidapp.model.api.io.ApiHandler;
+import tech.takenoko.easyandroidapp.model.api.model.ApiModel;
 import tech.takenoko.easyandroidapp.model.ormadb.LogDao;
 import tech.takenoko.easyandroidapp.model.ormadb.LogDto;
 import tech.takenoko.easyandroidapp.utility.CLog;
@@ -64,7 +63,7 @@ public class MainPresenter extends BasePresenter {
      */
     public void setupCamera() {
         List<LogDto> list = new ArrayList<>();
-        api.getLetest(new Api.ApiCallback() {
+        api.getLetest(new ApiHandler<ApiModel>() {
             @Override public void success(ApiModel model) {
                 CLog.info(tag, "success. " + model.toString());
             }

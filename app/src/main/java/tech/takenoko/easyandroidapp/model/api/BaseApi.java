@@ -13,18 +13,18 @@ import tech.takenoko.easyandroidapp.App;
 
 class BaseApi {
 
-    private Context context;
+    private static Context context;
 
     BaseApi(App app) {
-        this.context = app.getApplicationContext();
+        context = app.getApplicationContext();
     }
 
-    Retrofit retrofit(String url) {
-        return new Retrofit
-                .Builder()
-                .baseUrl(url)
-                .client(new OkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    static <T> T retrofit(String url, Class<T> protocolClass) {
+        Retrofit retrofit = new Retrofit.Builder()
+                                        .baseUrl(url)
+                                        .client(new OkHttpClient())
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build();
+        return retrofit.create(protocolClass);
     }
 }
